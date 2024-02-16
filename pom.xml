@@ -1,0 +1,14 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hhanskat.app</groupId>
+    <artifactId>groovemeister</artifactId>
+    <version>1</version>
+
+    <name>Groovemeister The Guitar Practice Buddy</name>
+    <url>https://github.com/HarryHanskat/groovemeister-the-guitar-practice-buddy</url>
+
+    <dependencies>
+        <!--Node, React, Cypress, Jest-->
+    </dependencies>
+</project>
