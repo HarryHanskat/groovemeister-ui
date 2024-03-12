@@ -4,10 +4,14 @@ const { Pool } = require('pg');
 const { v4: uuidv4 } = require('uuid');
 const livereload = require('livereload');
 const connectLiveReload = require('connect-livereload');
+const dontenv = require('dotenv');
 
+if(process.env.NODE_ENV !== 'production') {
+  dontenv.config();
+}
 
 const PORT = process.env.PORT || 3001;
-const publicDirectory = path.resolve(__dirname, '../client/build');
+const publicDirectory = path.resolve(__dirname, '../../client/build');
 
 let liveReloadServer = livereload.createServer();
 liveReloadServer.watch(publicDirectory);
@@ -20,15 +24,23 @@ app.use(express.static(publicDirectory));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+// Postgres Database setup not working lol
+//const pool = new Pool(process.env.DB_CONNECT);
 
-// Postgres Database setup
-const pool = new Pool({
+// Don't use .env for db config
+const pool = new Pool(DB_CONNECT={
   user: 'harryhanskat',
   host: 'localhost',
   database: 'groovemeister',
   port: 5432
 });
 
+pool.on('error', (err, client) => {
+  console.error('Unexpected error on idle client', err);
+  process.exit(-1);
+});
+
+// Test Database connection
 app.get('/test', async (req, res) => {
   try {
     const client = await pool.connect();
@@ -70,12 +82,12 @@ app.post('/api/addPracticeItem', (req, res) => {
 
 // Handle GET requests to /api route
 app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server! Live reloaded! Live reload?" });
+    res.json({ message: "Hello from server! Reloaded Live" });
 });
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
 });
 
 const start = async() => {
