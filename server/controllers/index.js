@@ -5,13 +5,14 @@ const { v4: uuidv4 } = require('uuid');
 const livereload = require('livereload');
 const connectLiveReload = require('connect-livereload');
 const dontenv = require('dotenv');
+const cors = require('cors');
 
 if(process.env.NODE_ENV !== 'production') {
   dontenv.config();
 }
 
 const PORT = process.env.PORT || 3001;
-const publicDirectory = path.resolve(__dirname, '../../client/build');
+const publicDirectory = path.resolve(__dirname, '../../public/build');
 
 let liveReloadServer = livereload.createServer();
 liveReloadServer.watch(publicDirectory);
@@ -19,7 +20,8 @@ liveReloadServer.watch(publicDirectory);
 const app = express();
 
 app.use(connectLiveReload());
-
+// allow for cross origin requests
+app.use(cors());
 app.use(express.static(publicDirectory));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -45,7 +47,8 @@ app.get('/test', async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query('SELECT NOW()');
-    res.json(result.rows[0]);
+    console.log(result.rows[0]);
+    res.json({ message: "getting results into proper format" });
     client.release();
   } catch (err) {
     console.error('Error connecting to database: ', err);
@@ -87,7 +90,7 @@ app.get("/api", (req, res) => {
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../../client/public', 'index.html'));
 });
 
 const start = async() => {

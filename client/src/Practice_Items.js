@@ -5,12 +5,10 @@ function Practice_Items() {
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/test');
-      const data = await response.json();
+    fetch('/test')
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
       console.log(data);
-    }
-    fetchData();
   }, []);
 
   return (
