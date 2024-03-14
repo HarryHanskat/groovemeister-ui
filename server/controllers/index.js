@@ -20,7 +20,7 @@ liveReloadServer.watch(publicDirectory);
 const app = express();
 
 app.use(connectLiveReload());
-// allow for cross origin requests
+// allow for cross origin requests. Saw online tutorial, don't think I ever managed to use cors... maybe worth it at some point? Idk
 app.use(cors());
 app.use(express.static(publicDirectory));
 app.use(express.json());
@@ -48,7 +48,6 @@ app.get('/test', async (req, res) => {
     const client = await pool.connect();
     const result = await client.query('SELECT NOW()');
     console.log(result.rows[0]);
-    res.json({ message: "getting results into proper format" });
     client.release();
   } catch (err) {
     console.error('Error connecting to database: ', err);
@@ -56,6 +55,7 @@ app.get('/test', async (req, res) => {
   }
 });
 
+// Just a demo of getting a uuid
 app.get('/uuid', (req, res) => {
   res.json(uuidv4());
 })
@@ -66,6 +66,26 @@ app.get('/api/PracticeItem', async (req, res) => {
     const client = await pool.connect();
     const result = await client.query('SELECT * FROM practice_items WHERE id = 1');
     res.json(result.rows[0]);
+    client.release();
+  } catch (err) {
+    console.error('Error connecting to database: ', err);
+    res.status(500).send('Database connection error');
+  }
+});
+
+// Get specific practice item by index
+app.param('index', function(req, res, next, index) {
+  const modified = index;
+
+  req.index = modified;
+  next();
+});
+
+app.get('/api/PracticeItem/:index', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM practice_items WHERE id = ' + req.index);
+    res.json(result.rows);
     client.release();
   } catch (err) {
     console.error('Error connecting to database: ', err);
