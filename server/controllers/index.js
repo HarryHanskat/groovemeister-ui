@@ -27,15 +27,15 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // Postgres Database setup not working lol
-//const pool = new Pool(process.env.DB_CONNECT);
+const pool = new Pool(process.env.DB_CONNECT);
 
 // Don't use .env for db config
-const pool = new Pool(DB_CONNECT={
-  user: 'harryhanskat',
-  host: 'localhost',
-  database: 'groovemeister',
-  port: 5432
-});
+// const pool = new Pool(DB_CONNECT={
+//   user: 'harryhanskat',
+//   host: 'localhost',
+//   database: 'groovemeister',
+//   port: 5432
+// });
 
 pool.on('error', (err, client) => {
   console.error('Unexpected error on idle client', err);

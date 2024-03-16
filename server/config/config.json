@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "harryhanskat",
-    "password": null,
+    "username": "me",
+    "password": "password",
     "database": "groovemeister",
     "host": "localhost",
     "port": 5432
