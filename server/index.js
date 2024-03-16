@@ -1,18 +1,18 @@
 const path = require('path');
 const express = require("express");
-const { Pool } = require('pg');
-const { v4: uuidv4 } = require('uuid');
+const bodyParser = require("body-parser");
 const livereload = require('livereload');
 const connectLiveReload = require('connect-livereload');
 const dontenv = require('dotenv');
 const cors = require('cors');
+const db = require('./config/db.js');
 
 if(process.env.NODE_ENV !== 'production') {
   dontenv.config();
 }
 
 const PORT = process.env.PORT || 3001;
-const publicDirectory = path.resolve(__dirname, '../../public/build');
+const publicDirectory = path.resolve(__dirname, '../../public');
 
 let liveReloadServer = livereload.createServer();
 liveReloadServer.watch(publicDirectory);
@@ -21,26 +21,19 @@ const app = express();
 
 app.use(connectLiveReload());
 // allow for cross origin requests. Saw online tutorial, don't think I ever managed to use cors... maybe worth it at some point? Idk
-app.use(cors());
+var corsOptions = {
+  origin: "http://localhost:3001"
+};
+app.use(cors(corsOptions));
 app.use(express.static(publicDirectory));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-// Postgres Database setup not working lol
-const pool = new Pool(process.env.DB_CONNECT);
-
-// Don't use .env for db config
-// const pool = new Pool(DB_CONNECT={
-//   user: 'harryhanskat',
-//   host: 'localhost',
-//   database: 'groovemeister',
-//   port: 5432
-// });
-
-pool.on('error', (err, client) => {
-  console.error('Unexpected error on idle client', err);
-  process.exit(-1);
-});
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+const db = require("./api/models");
+db.sequelize.sync();
 
 // Test Database connection
 app.get('/test', async (req, res) => {
@@ -55,18 +48,11 @@ app.get('/test', async (req, res) => {
   }
 });
 
-// Just a demo of getting a uuid
-app.get('/uuid', (req, res) => {
-  res.json(uuidv4());
-})
-
 // Get first row of the practice items table.
 app.get('/api/PracticeItem', async (req, res) => {
   try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT * FROM practice_items WHERE id = 1');
+    const result = await db.query('SELECT * FROM practice_items WHERE id = 1');
     res.json(result.rows[0]);
-    client.release();
   } catch (err) {
     console.error('Error connecting to database: ', err);
     res.status(500).send('Database connection error');
@@ -110,14 +96,13 @@ app.get("/api", (req, res) => {
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../client/public', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../client/public', 'index.html'));
 });
 
 const start = async() => {
   // Test Database connection before starting the server
   try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT NOW()');
+    const result = await db.query('SELECT NOW()');
     console.log("DB Connection Successful", result.rows[0]);
 
     // Given a successful connection then we start the server.
