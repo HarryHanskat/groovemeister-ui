@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
 import logo from './assets/logo.svg';
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import './App.css';
 
 function App() {
   const [data, setData] = React.useState(null);
   
   React.useEffect(() => {
-    fetch("/api/PracticeItem")
+    fetch("/api/practiceItems/")
       .then((res) => res.json())
       .then((data) => setData(data.description));
   }, []);

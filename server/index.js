@@ -5,7 +5,7 @@ const livereload = require('livereload');
 const connectLiveReload = require('connect-livereload');
 const dontenv = require('dotenv');
 const cors = require('cors');
-const db = require('./config/db.js');
+//const db = require('./config/db.js');
 
 if(process.env.NODE_ENV !== 'production') {
   dontenv.config();
@@ -24,70 +24,69 @@ app.use(connectLiveReload());
 var corsOptions = {
   origin: "http://localhost:3001"
 };
+
 app.use(cors(corsOptions));
-app.use(express.static(publicDirectory));
+// app.use(express.static(publicDirectory));
 app.use(express.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+app.use(express.urlencoded({ extended: true }));
+
 const db = require("./api/models");
-db.sequelize.sync();
+db.sequelize.sync()
+  .then(() => {
+    console.log("\n\n*********** Synced db *************\n\n");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
+
+// if you need to drop existing tables and resync the database use this
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 // Test Database connection
-app.get('/test', async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT NOW()');
-    console.log(result.rows[0]);
-    client.release();
-  } catch (err) {
-    console.error('Error connecting to database: ', err);
-    res.status(500).send('Database connection error');
-  }
-});
+// app.get('/test', async (req, res) => {
+//   try {
+//     const client = await pool.connect();
+//     const result = await client.query('SELECT NOW()');
+//     console.log(result.rows[0]);
+//     client.release();
+//   } catch (err) {
+//     console.error('Error connecting to database: ', err);
+//     res.status(500).send('Database connection error');
+//   }
+// });
 
 // Get first row of the practice items table.
-app.get('/api/PracticeItem', async (req, res) => {
-  try {
-    const result = await db.query('SELECT * FROM practice_items WHERE id = 1');
-    res.json(result.rows[0]);
-  } catch (err) {
-    console.error('Error connecting to database: ', err);
-    res.status(500).send('Database connection error');
-  }
-});
+// app.get('/api/PracticeItem', async (req, res) => {
+//   try {
+//     const result = await db.query('SELECT * FROM practice_items WHERE id = 1');
+//     res.json(result.rows[0]);
+//   } catch (err) {
+//     console.error('Error connecting to database: ', err);
+//     res.status(500).send('Database connection error');
+//   }
+// });
 
-// Get specific practice item by index
-app.param('index', function(req, res, next, index) {
-  const modified = index;
+// // Get specific practice item by index
+// app.param('index', function(req, res, next, index) {
+//   const modified = index;
 
-  req.index = modified;
-  next();
-});
+//   req.index = modified;
+//   next();
+// });
 
-app.get('/api/PracticeItem/:index', async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT * FROM practice_items WHERE id = ' + req.index);
-    res.json(result.rows);
-    client.release();
-  } catch (err) {
-    console.error('Error connecting to database: ', err);
-    res.status(500).send('Database connection error');
-  }
-});
-
-app.post('/api/addPracticeItem', (req, res) => {
-  try {
-    console.log(req.body);
-    res.status(200).send("Practice Item Added");
-  } catch (err) {
-    console.error('Not implemented yet', err);
-    res.status(500).send('Not implemented yet');
-  }
-});
+// app.get('/api/PracticeItem/:index', async (req, res) => {
+//   try {
+//     const client = await pool.connect();
+//     const result = await client.query('SELECT * FROM practice_items WHERE id = ' + req.index);
+//     res.json(result.rows);
+//     client.release();
+//   } catch (err) {
+//     console.error('Error connecting to database: ', err);
+//     res.status(500).send('Database connection error');
+//   }
+// });
 
 // Handle GET requests to /api route
 app.get("/api", (req, res) => {
@@ -102,12 +101,14 @@ app.get('*', (req, res) => {
 const start = async() => {
   // Test Database connection before starting the server
   try {
-    const result = await db.query('SELECT NOW()');
-    console.log("DB Connection Successful", result.rows[0]);
+    //const result = await db.query('SELECT NOW()');
+    //console.log("DB Connection Successful", result.rows[0]);
 
     // Given a successful connection then we start the server.
+    require("./api/routes/practiceItem.routes.js")(app);
+
     app.listen(PORT, () => {
-      console.log(`Server listening on ${PORT}`);
+      console.log(`Server listening on ${PORT}\n\n`);
     });
   } catch (err) {
     console.error('Error connecting to database: ', err);

@@ -1,5 +1,10 @@
+// Here we're defining the structure of a 'Practice Item' creating a variable for it that will allow us to structure future practice items following the same pattern.
+
 module.exports = (sequelize, Sequelize) => {
     const practiceItem = sequelize.define("practiceItem", {
+        duration: {
+            type: Sequelize.INTEGER
+        },
         frequency: {
             type: Sequelize.STRING
         },
@@ -14,10 +19,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         type: {
             type: Sequelize.STRING
-        },
-        duration: {
-            type: Sequelize.INTEGER
-        }
+        }  
     });
 
     return practiceItem;
