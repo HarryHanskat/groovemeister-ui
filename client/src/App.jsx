@@ -8,9 +8,9 @@ function App() {
   const [data, setData] = React.useState(null);
   
   React.useEffect(() => {
-    fetch("/api/practiceItems/")
+    fetch("/api/practiceItems")
       .then((res) => res.json())
-      .then((data) => setData(data.description));
+      .then((data) => setData(data[0].description));
   }, []);
 
   return (

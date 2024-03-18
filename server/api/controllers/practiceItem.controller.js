@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     practiceItem.findAll()
         .then(data => {
-            res.send(data);
+            res.json(data);
         })
         .catch(err => {
             res.status(500).send({
@@ -54,11 +54,7 @@ exports.findOne = (req, res) => {
   
     practiceItem.findByPk(id)
         .then(data => {
-            if (data) {
-                res.status(404).send({
-                    message: 'Cannot find Practice Item with the id=${id}.'
-                });
-            }
+            res.send(data);
         })
         .catch(err => {
             res.status(500).send({
