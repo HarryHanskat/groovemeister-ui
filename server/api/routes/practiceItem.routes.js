@@ -18,7 +18,7 @@ module.exports = app => {
   router.get("/:id", practiceItems.findOne);
 
   // Update a Practice Item with id
-  router.get("/:id", practiceItems.update);
+  router.put("/:id", practiceItems.update);
 
   // Delete a Practice Item with id
   router.delete("/:id", practiceItems.delete);
