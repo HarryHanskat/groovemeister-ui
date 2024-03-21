@@ -36,7 +36,10 @@ exports.create = (req, res) => {
 
 // Retrieve all Practice Items from the database with specific type
 exports.findAll = (req, res) => {
-    practiceItem.findAll()
+    const description = req.query.description;
+    let condition = description ? {description: { [Op.iLike]: `%${title}%`} } : null;
+
+    practiceItem.findAll({ where: condition })
         .then(data => {
             res.json(data);
         })

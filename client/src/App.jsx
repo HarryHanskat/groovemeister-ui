@@ -3,7 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { createRoot } from "react-dom/client";
 import { Routes, Link, Route } from "react-router-dom";
 import './App.css';
-import Header from './components/Header.jsx'
+
+import Header from './components/Header';
+import PracticeItemsList from './components/practiceItemsList.component';
+import AddPracticeItem from "./components/add-practiceItem.component";
+import PracticeItem from "./components/practiceItem.component";
 
 class App extends Component {
   render () {
@@ -11,9 +15,9 @@ class App extends Component {
       <div>
         <Header />
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/practiceItems" className="navbar-brand">
+          <Link href="/practiceItems" className="navbar-brand">
             Groovemeister
-          </a>
+          </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/practiceItems"} className="nav-link">
@@ -30,10 +34,10 @@ class App extends Component {
 
         <div className="container mt-3">
           <Routes>
-            <Route path="/" element={<PracticeItemsList/>} />
-            <Route path="/practiceItems" element={<PracticeItemsList/>} />
-            <Route path="/add" element={<AddPracticeItem/>} />
-            <Route path="/practiceItems/:id" element={<PracticeItem/>} />
+            <Route path="/" element={<PracticeItemsList />} />
+            <Route path="/practiceItems" element={<PracticeItemsList />} />
+            <Route path="/add" element={<AddPracticeItem />} />
+            <Route path="/practiceItems/:id" element={<PracticeItem />} />
           </Routes>
         </div>
       </div>

@@ -10,7 +10,7 @@ export default class AddPracticeItem extends Component {
         this.onChangeTopic = this.onChangeTopic.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
         this.onChangeDuration = this.onChangeDuration.bind(this);
-        
+
         this.savePracticeItem = this.savePracticeItem.bind(this);
         this.newPracticeItem = this.newPracticeItem.bind(this);
 
@@ -32,7 +32,7 @@ export default class AddPracticeItem extends Component {
             frequency: e.target.value
         });
     }
-    
+
     onChangeDescription(e) {
         this.setState({
             description: e.target.value
@@ -117,7 +117,6 @@ export default class AddPracticeItem extends Component {
                             Add
                         </button>
                     </div>
-
                 ) : (
                     <div>
                         <div className="form-group">
@@ -183,7 +182,7 @@ export default class AddPracticeItem extends Component {
 
                         <button onClick={this.savePracticeItem} className="btn btn-success">
                             Submit
-                        </button> 
+                        </button>
                     </div>
                 )}
             </div>

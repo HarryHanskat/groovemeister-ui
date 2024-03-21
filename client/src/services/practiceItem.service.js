@@ -30,8 +30,8 @@ class PracticeItemDataService {
         return http.delete(`/practiceItems`);
     }
 
-    findByType(type) {
-        return http.get(`/practiceItems?type=${type}`);
+    findByDescription(description) {
+        return http.get(`/practiceItems?description=${description}`);
     }
 }
 
