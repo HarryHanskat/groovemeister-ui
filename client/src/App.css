@@ -13,3 +13,11 @@
   max-width: 300px;
   margin: auto;
 }
+
+.navbar-brand{
+  margin-left: 20px;
+}
+
+.badge{
+  color:blue; 
+}

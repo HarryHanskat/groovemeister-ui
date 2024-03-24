@@ -5,7 +5,7 @@ import { withRouter } from '../common/with-router';
 class PracticeItem extends Component {
     constructor(props) {
         super(props);
-        this.onChangeFrequency = this.onChangedFrequency.bind(this);
+        this.onChangeFrequency = this.onChangeFrequency.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeSource_Link = this.onChangeSource_Link.bind(this);
         this.onChangeTopic = this.onChangeTopic.bind(this);
@@ -157,6 +157,16 @@ class PracticeItem extends Component {
                                     id="description"
                                     value={currentPracticeItem.description}
                                     onChange={this.onChangeDescription}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="duration">Duration (minutes)</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    id="duration"
+                                    value={currentPracticeItem.duration}
+                                    onChange={this.onChangeDuration}
                                 />
                             </div>
                             <div className="form-group">

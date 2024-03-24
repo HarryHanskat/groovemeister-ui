@@ -148,17 +148,34 @@ export default class PracticeItemList extends Component {
                             </div>
                             <div>
                                 <label>
+                                    <strong>Duration (minutes):</strong>
+                                </label>{" "}
+                                {currentPracticeItem.duration}
+                            </div>
+                            <div>
+                                <label>
                                     <strong>Frequency:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.frequency}
                             </div>
                             <div>
                                 <label>
-                                    <strong>Duration:</strong>
+                                    <strong>Topic:</strong>
                                 </label>{" "}
-                                {currentPracticeItem.duration}
+                                {currentPracticeItem.topic}
                             </div>
-
+                            <div>
+                                <label>
+                                    <strong>Type:</strong>
+                                </label>{" "}
+                                {currentPracticeItem.type}
+                            </div>
+                            <div>
+                                <label>
+                                    <strong>Source/Link:</strong>
+                                </label>{" "}
+                                {currentPracticeItem.source_link}
+                            </div>
                             <Link
                                 to={"/practiceItems/" + currentPracticeItem.id}
                                 className="badge badge-warning"

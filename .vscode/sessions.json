@@ -1,0 +1,44 @@
+{
+  "$schema": "https://cdn.statically.io/gh/nguyenngoclongdev/cdn/main/schema/v10/terminal-keeper.json",
+  "theme": "tribe",
+  "active": "default",
+  "activateOnStartup": true,
+  "keepExistingTerminals": false,
+  "sessions": {
+    "default": [
+      {
+        "name": "groovemeister",
+        "autoExecuteCommands": true,
+        "icon": "person",
+        "color": "terminal.ansiBrightMagenta",
+        "commands": [
+          "echo hello"
+        ]
+      },
+      [
+        {
+          "name": "client",
+          "color": "terminal.ansiBrightGreen",
+          "commands": [
+            "cd client"
+          ]
+        },
+        {
+          "name": "server",
+          "color": "terminal.ansiBrightBlue",
+          "commands": [
+            "cd server"
+          ]
+        }
+      ]
+    ],
+    "saved-session": [
+      {
+        "name": "connect",
+        "commands": [
+          ""
+        ]
+      }
+    ]
+  }
+}

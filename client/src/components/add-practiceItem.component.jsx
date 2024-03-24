@@ -4,7 +4,7 @@ import PracticeItemDataService from "../services/practiceItem.service";
 export default class AddPracticeItem extends Component {
     constructor(props) {
         super(props);
-        this.onChangeFrequency = this.onChangedFrequency.bind(this);
+        this.onChangeFrequency = this.onChangeFrequency.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeSource_Link = this.onChangeSource_Link.bind(this);
         this.onChangeTopic = this.onChangeTopic.bind(this);
@@ -132,6 +132,18 @@ export default class AddPracticeItem extends Component {
                             />
                         </div>
                         <div className="form-group">
+                            <label htmlFor="duration">Duration (minutes)</label>
+                            <input
+                                type="number"
+                                className="form-control"
+                                id="duration"
+                                required
+                                value={this.state.duration}
+                                onChange={this.onChangeDuration}
+                                name="duration"
+                            />
+                        </div>
+                        <div className="form-group">
                             <label htmlFor="frequency">Frequency</label>
                             <input
                                 type="text"
@@ -141,18 +153,6 @@ export default class AddPracticeItem extends Component {
                                 value={this.state.frequency}
                                 onChange={this.onChangeFrequency}
                                 name="frequency"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="source_link">Source Link</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="source_link"
-                                required
-                                value={this.state.source_link}
-                                onChange={this.onChangeSource_ink}
-                                name="source_link"
                             />
                         </div>
                         <div className="form-group">
@@ -179,7 +179,18 @@ export default class AddPracticeItem extends Component {
                                 name="type"
                             />
                         </div>
-
+                        <div className="form-group">
+                            <label htmlFor="source_link">Source Link</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="source_link"
+                                required
+                                value={this.state.source_link}
+                                onChange={this.onChangeSource_Link}
+                                name="source_link"
+                            />
+                        </div>
                         <button onClick={this.savePracticeItem} className="btn btn-success">
                             Submit
                         </button>

@@ -13,7 +13,6 @@ class App extends Component {
   render () {
     return(
       <div>
-        <Header />
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link href="/practiceItems" className="navbar-brand">
             Groovemeister
