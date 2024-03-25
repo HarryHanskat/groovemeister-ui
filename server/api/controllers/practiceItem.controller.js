@@ -1,6 +1,7 @@
+const { Sequelize } = require("sequelize");
 const db = require("../models");
 const practiceItem = db.practiceItem;
-const Op = db.sequelize.Op;
+const Op = Sequelize.Op;
 
 // Create new practice item
 exports.create = (req, res) => {
@@ -34,9 +35,12 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all Practice Items from the database with specific type
+// Retrieve all Practice Items from the database with specific description
 exports.findAll = (req, res) => {
-    practiceItem.findAll()
+    const description = req.query.description;
+    let condition = description ? {description: { [Op.iLike]: `%${description}%`} } : null;
+
+    practiceItem.findAll({ where: condition })
         .then(data => {
             res.json(data);
         })

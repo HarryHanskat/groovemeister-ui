@@ -1,6 +1,7 @@
 /.idea
 /target
 */node_modules
+/.vscode
 
 ### Node ### 
 # Logs
@@ -10,3 +11,4 @@ logs
 /nyc
 /.env
 /.DS_Store
+.vscode/sessions.json
