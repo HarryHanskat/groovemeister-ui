@@ -30,6 +30,7 @@ class PracticeItem extends Component {
         };
     }
 
+    // If the component 'mounts' successfully, then get the id parameter from the get request
     componentDidMount() {
         this.getPracticeItem(this.props.router.params.id);
     }

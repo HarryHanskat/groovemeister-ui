@@ -14,7 +14,7 @@ class App extends Component {
     return(
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link href="/practiceItems" className="navbar-brand">
+          <Link to={"/practiceItems"} className="navbar-brand nav-link">
             Groovemeister
           </Link>
           <div className="navbar-nav mr-auto">
@@ -36,6 +36,7 @@ class App extends Component {
             <Route path="/" element={<PracticeItemsList />} />
             <Route path="/practiceItems" element={<PracticeItemsList />} />
             <Route path="/add" element={<AddPracticeItem />} />
+            {/* Use the 'withRouter' class because we need to accept the ID parameter */}
             <Route path="/practiceItems/:id" element={<PracticeItem />} />
           </Routes>
         </div>
