@@ -98,12 +98,14 @@ export default class PracticeItemList extends Component {
                             placeholder="Search by description"
                             value={searchDescription}
                             onChange={this.onChangeSearchDescription}
+                            data-cy="textBox-search"
                         />
                         <div className="input-group-append">
                             <button
                                 className="btn btn-outline-secondary"
                                 type="button"
                                 onClick={this.searchDescription}
+                                data-cy="button-search"
                             >
                                 Search
                             </button>
@@ -111,9 +113,9 @@ export default class PracticeItemList extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Practice Items List</h4>
+                    <h4 data-cy="header-practiceItemsList">Practice Items List</h4>
 
-                    <ul className="list-group">
+                    <ul data-cy="list-practiceItemsList" className="list-group">
                         {practiceItems &&
                             practiceItems.map((practiceItem, index) => (
                                 <li
@@ -123,6 +125,7 @@ export default class PracticeItemList extends Component {
                                     }
                                     onClick={() => this.setActivePracticeItem(practiceItem, index)}
                                     key={index}
+                                    data-cy={"listItem"+index+"-practiceItemsList"}
                                 >
                                     {practiceItem.description}
                                 </li>
@@ -132,6 +135,7 @@ export default class PracticeItemList extends Component {
                     <button
                         className="m-3 btn btn-sm btn-danger"
                         onClick={this.removeAllPracticeItems}
+                        data-cy="buttonRemoveAll-practiceItemsList"
                     >
                         Remove All
                     </button>
