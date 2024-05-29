@@ -11,7 +11,7 @@
 // please read our getting started guide:
 // https://on.cypress.io/introduction-to-cypress
 
-import selectors from '../selectorStorage/allSelectors.js';
+import selectors from '../../support/selectors.js';
 
 describe('groovemeister app', () => {
 

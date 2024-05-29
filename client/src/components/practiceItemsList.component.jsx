@@ -145,37 +145,37 @@ export default class PracticeItemList extends Component {
                         <div>
                             <h4>Practice Item</h4>
                             <div>
-                                <label>
+                                <label data-cy="labelDescription-selectedPracticeItem">
                                     <strong>Description:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.description}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelDuration-selectedPracticeItem">
                                     <strong>Duration (minutes):</strong>
                                 </label>{" "}
                                 {currentPracticeItem.duration}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelFrequency-selectedPracticeItem">
                                     <strong>Frequency:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.frequency}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelTopic-selectedPracticeItem">
                                     <strong>Topic:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.topic}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelType-selectedPracticeItem">
                                     <strong>Type:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.type}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelSourceLink-selectedPracticeItem">
                                     <strong>Source/Link:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.source_link}
@@ -183,6 +183,7 @@ export default class PracticeItemList extends Component {
                             <Link
                                 to={"/practiceItems/" + currentPracticeItem.id}
                                 className="badge badge-warning"
+                                data-cy="linkEdit-selectedPracticeItem"
                             >
                                 Edit
                             </Link>
@@ -190,7 +191,7 @@ export default class PracticeItemList extends Component {
                     ) : (
                         <div>
                             <br />
-                            <p>Please click on a Practice Item...</p>
+                            <p data-cy="placeholderText-selectedPracticeItem">Please click on a Practice Item...</p>
                         </div>
                     )}
                 </div>
