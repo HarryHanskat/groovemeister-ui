@@ -18,11 +18,11 @@ export const selectors = {
     },
     practiceItemsList: {
         headerPracticeItems: '[data-cy="header-practiceItemsList"]',
-        listAllPracticeItems: '[data-cy="list-practiceItemsList"]',
+        listAllPracticeItems: '[data-cy="list-practiceItemsList"] li',
         itemActivePracticeItem: '[data-cy="listItem*active"]',
         buttonRemoveAllPracticeItems: '[data-cy="buttonRemoveAll-practiceItemsList"]'
     } ,
-    practiceItem: {
+    selectedPracticeItem: {
         labelDescription: '[data-cy="labelDescription-selectedPracticeItem"]',
         labelDuration: '[data-cy="labelDuration-selectedPracticeItem"]',
         labelFrequency: '[data-cy="labelFrequency-selectedPracticeItem"]',

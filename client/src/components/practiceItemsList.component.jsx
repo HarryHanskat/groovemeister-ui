@@ -180,13 +180,13 @@ export default class PracticeItemList extends Component {
                                 </label>{" "}
                                 {currentPracticeItem.source_link}
                             </div>
-                            <Link
+                            <button
                                 to={"/practiceItems/" + currentPracticeItem.id}
                                 className="badge badge-warning"
                                 data-cy="linkEdit-selectedPracticeItem"
                             >
                                 Edit
-                            </Link>
+                            </button>
                         </div>
                     ) : (
                         <div>
