@@ -113,7 +113,7 @@ export default class AddPracticeItem extends Component {
                 {this.state.submitted ? (
                     <div>
                         <h4>You submitted successfully!</h4>
-                        <button className="btn btn-success" onClick={this.newPracticeItem}>
+                        <button className="btn btn-success" onClick={this.newPracticeItem} data-cy="buttonAdd-addPracticeItem">
                             Add
                         </button>
                     </div>
@@ -129,6 +129,7 @@ export default class AddPracticeItem extends Component {
                                 value={this.state.description}
                                 onChange={this.onChangeDescription}
                                 name="description"
+                                data-cy="inputDescription-addPracticeItem"
                             />
                         </div>
                         <div className="form-group">
@@ -141,6 +142,7 @@ export default class AddPracticeItem extends Component {
                                 value={this.state.duration}
                                 onChange={this.onChangeDuration}
                                 name="duration"
+                                data-cy="inputDuration-addPracticeItem"
                             />
                         </div>
                         <div className="form-group">
@@ -153,6 +155,7 @@ export default class AddPracticeItem extends Component {
                                 value={this.state.frequency}
                                 onChange={this.onChangeFrequency}
                                 name="frequency"
+                                data-cy="inputFrequency-addPracticeItem"
                             />
                         </div>
                         <div className="form-group">
@@ -165,6 +168,7 @@ export default class AddPracticeItem extends Component {
                                 value={this.state.topic}
                                 onChange={this.onChangeTopic}
                                 name="topic"
+                                data-cy="inputTopic-addPracticeItem"
                             />
                         </div>
                         <div className="form-group">
@@ -177,6 +181,7 @@ export default class AddPracticeItem extends Component {
                                 value={this.state.type}
                                 onChange={this.onChangeType}
                                 name="type"
+                                data-cy="inputType-addPracticeItem"
                             />
                         </div>
                         <div className="form-group">
@@ -189,9 +194,10 @@ export default class AddPracticeItem extends Component {
                                 value={this.state.source_link}
                                 onChange={this.onChangeSource_Link}
                                 name="source_link"
+                                data-cy="inputSourceLink-addPracticeItem"
                             />
                         </div>
-                        <button onClick={this.savePracticeItem} className="btn btn-success">
+                        <button onClick={this.savePracticeItem} className="btn btn-success" data-cy="buttonSubmit-addPracticeItem">
                             Submit
                         </button>
                     </div>

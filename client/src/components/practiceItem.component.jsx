@@ -30,6 +30,7 @@ class PracticeItem extends Component {
         };
     }
 
+    // If the component 'mounts' successfully, then get the id parameter from the get request
     componentDidMount() {
         this.getPracticeItem(this.props.router.params.id);
     }
@@ -157,6 +158,7 @@ class PracticeItem extends Component {
                                     id="description"
                                     value={currentPracticeItem.description}
                                     onChange={this.onChangeDescription}
+                                    data-cy="inputDescription-editPracticeItem"
                                 />
                             </div>
                             <div className="form-group">
@@ -167,6 +169,7 @@ class PracticeItem extends Component {
                                     id="duration"
                                     value={currentPracticeItem.duration}
                                     onChange={this.onChangeDuration}
+                                    data-cy="inputDuration-editPracticeItem"
                                 />
                             </div>
                             <div className="form-group">
@@ -177,6 +180,7 @@ class PracticeItem extends Component {
                                     id="frequency"
                                     value={currentPracticeItem.frequency}
                                     onChange={this.onChangeFrequency}
+                                    data-cy="inputFrequency-editPracticeItem"
                                 />
                             </div>
                             <div className="form-group">
@@ -187,6 +191,7 @@ class PracticeItem extends Component {
                                     id="source_link"
                                     value={currentPracticeItem.source_link}
                                     onChange={this.onChangeSource_Link}
+                                    data-cy="inputSourceLink-editPracticeItem"
                                 />
                             </div>
                             <div className="form-group">
@@ -197,6 +202,7 @@ class PracticeItem extends Component {
                                     id="topic"
                                     value={currentPracticeItem.topic}
                                     onChange={this.onChangeTopic}
+                                    data-cy="inputTopic-editPracticeItem"
                                 />
                             </div>
                             <div className="form-group">
@@ -207,12 +213,14 @@ class PracticeItem extends Component {
                                     id="type"
                                     value={currentPracticeItem.type}
                                     onChange={this.onChangeType}
+                                    data-cy="inputType-editPracticeItem"
                                 />
                             </div>
                         </form>
                         <button
                             className="badge badge-danger mr-2"
                             onClick={this.deletePracticeItem}
+                            data-cy="buttonDelete-editPracticeItem"
                         >
                             Delete
                         </button>
@@ -221,6 +229,7 @@ class PracticeItem extends Component {
                             type="submit"
                             className="badge badge-success"
                             onClick={this.updatePracticeItem}
+                            data-cy="buttonSubmit-editPracticeItem"
                         >
                             Update
                         </button>

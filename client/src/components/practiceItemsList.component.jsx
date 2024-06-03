@@ -98,12 +98,14 @@ export default class PracticeItemList extends Component {
                             placeholder="Search by description"
                             value={searchDescription}
                             onChange={this.onChangeSearchDescription}
+                            data-cy="textBox-search"
                         />
                         <div className="input-group-append">
                             <button
                                 className="btn btn-outline-secondary"
                                 type="button"
                                 onClick={this.searchDescription}
+                                data-cy="button-search"
                             >
                                 Search
                             </button>
@@ -111,9 +113,9 @@ export default class PracticeItemList extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Practice Items List</h4>
+                    <h4 data-cy="header-practiceItemsList">Practice Items List</h4>
 
-                    <ul className="list-group">
+                    <ul data-cy="list-practiceItemsList" className="list-group">
                         {practiceItems &&
                             practiceItems.map((practiceItem, index) => (
                                 <li
@@ -123,6 +125,7 @@ export default class PracticeItemList extends Component {
                                     }
                                     onClick={() => this.setActivePracticeItem(practiceItem, index)}
                                     key={index}
+                                    data-cy={"listItem"+index+"-practiceItemsList"}
                                 >
                                     {practiceItem.description}
                                 </li>
@@ -132,6 +135,7 @@ export default class PracticeItemList extends Component {
                     <button
                         className="m-3 btn btn-sm btn-danger"
                         onClick={this.removeAllPracticeItems}
+                        data-cy="buttonRemoveAll-practiceItemsList"
                     >
                         Remove All
                     </button>
@@ -141,52 +145,53 @@ export default class PracticeItemList extends Component {
                         <div>
                             <h4>Practice Item</h4>
                             <div>
-                                <label>
+                                <label data-cy="labelDescription-selectedPracticeItem">
                                     <strong>Description:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.description}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelDuration-selectedPracticeItem">
                                     <strong>Duration (minutes):</strong>
                                 </label>{" "}
                                 {currentPracticeItem.duration}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelFrequency-selectedPracticeItem">
                                     <strong>Frequency:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.frequency}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelTopic-selectedPracticeItem">
                                     <strong>Topic:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.topic}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelType-selectedPracticeItem">
                                     <strong>Type:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.type}
                             </div>
                             <div>
-                                <label>
+                                <label data-cy="labelSourceLink-selectedPracticeItem">
                                     <strong>Source/Link:</strong>
                                 </label>{" "}
                                 {currentPracticeItem.source_link}
                             </div>
-                            <Link
+                            <button
                                 to={"/practiceItems/" + currentPracticeItem.id}
                                 className="badge badge-warning"
+                                data-cy="linkEdit-selectedPracticeItem"
                             >
                                 Edit
-                            </Link>
+                            </button>
                         </div>
                     ) : (
                         <div>
                             <br />
-                            <p>Please click on a Practice Item...</p>
+                            <p data-cy="placeholderText-selectedPracticeItem">Please click on a Practice Item...</p>
                         </div>
                     )}
                 </div>
